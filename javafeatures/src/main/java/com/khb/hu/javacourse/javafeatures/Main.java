@@ -42,6 +42,8 @@ public class Main {
         System.out.println(switchPatternDemo("No"));
         System.out.println(switchPatternDemo(null));
         System.out.println(switchPatternDemo(new A()));
+
+        recordPatterMatchingDemo();
     }
 
 
@@ -122,8 +124,8 @@ public class Main {
 
     //Java 16
     public static void recordDemo() {
-        Book book = new Book("abc", "my author", "12345ABC");
-        Book book2 = new Book("abc", "my author", "12345ABC");
+        Book book = new Book("abc", "my author", "12345ABC", null);
+        Book book2 = new Book("abc", "my author", "12345ABC", null);
 
         System.out.println(book.title());
         System.out.println(book);
@@ -135,7 +137,7 @@ public class Main {
         System.out.println(map.get(book2));
         System.out.println(book instanceof Record);
 
-        Book book3 = new Book("abc", null, "12345ABC");
+        Book book3 = new Book("abc", null, "12345ABC", null);
         System.out.println(book3);
 
 
@@ -200,6 +202,26 @@ public class Main {
             case String s when "Yes".equalsIgnoreCase(s) -> true;
             case String s when "No".equalsIgnoreCase(s) -> false;
             default -> false;
+        };
+    }
+
+
+    private static void recordPatterMatchingDemo() {
+        Book book = new Book("ABC", null, "ABCD123", new Book.Chapter("sample", 100));
+        Book book2 = new Book("ABC", null, "ABCD123", new Book.Chapter("sample", 50));
+        Book book3 = new Book("ABC", null, "ABCD123", null);
+
+        System.out.println(getChapterPages(book));
+        System.out.println(getChapterPages(book2));
+        System.out.println(getChapterPages(book3));
+        System.out.println(getChapterPages(null));
+    }
+
+    private static Integer getChapterPages(Book book) {
+        return switch (book) {
+            case null -> null;
+            case Book(String title, String author, String isbn, Book.Chapter(String chapterTitle, int pages)) -> pages;
+            default -> null;
         };
     }
 }

@@ -2,9 +2,9 @@ package com.khb.hu.javacourse.javafeatures;
 
 import java.io.Serializable;
 
-public record Book(@MyAnnotation String title, String author, String isbn) implements Titled, Serializable {
+public record Book(@MyAnnotation String title, String author, String isbn, Chapter sampleChapter) implements Titled, Serializable {
 
-    public static record Chapter(String title, int pages) implements Titled{
+    public /*static*/ record Chapter(String title, int pages) implements Titled{
 
     }
 
@@ -33,7 +33,7 @@ public record Book(@MyAnnotation String title, String author, String isbn) imple
     }
 
     public Book(String title) {
-        this(title, null, null);
+        this(title, null, null, null);
     }
 
     @Override
