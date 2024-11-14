@@ -1,4 +1,4 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 public class Counter implements Comparable<Counter>{
     public final static Counter EMPTY = new Counter();

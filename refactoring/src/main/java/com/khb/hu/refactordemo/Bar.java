@@ -1,4 +1,4 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 public class Bar {
     Foo foo;

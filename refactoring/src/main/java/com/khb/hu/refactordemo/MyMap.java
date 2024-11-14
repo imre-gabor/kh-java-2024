@@ -1,6 +1,6 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
-public class MyMap {
+public class MyMap<K, V> {
     int count = 0;
 
     public int getCount() {
@@ -12,7 +12,7 @@ public class MyMap {
     }
 
     public static void main(String[] args) {
-        MyMap myMap = new MyMap();
+        MyMap<String, Object> myMap = new MyMap<>();
         System.out.println(myMap.getCount());
     }
 }

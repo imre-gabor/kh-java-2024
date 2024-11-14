@@ -1,4 +1,4 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public class ViewImpl implements View {
     }
 
     @Override
-    public List<Integer> getItemsList() {
-        return List.of(1, 2, 3,4, 5).subList(fromIndex, toIndex);
+    public List<Integer> getItems(List<Integer> list) {
+        return list.subList(fromIndex, toIndex);
     }
 }

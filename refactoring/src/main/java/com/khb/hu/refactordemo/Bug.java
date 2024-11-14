@@ -1,14 +1,14 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 import java.util.Objects;
 
 public class Bug {
     private long id;
-    private String desc;
+    private String description;
     private BugLevel bugRating = BugLevel.NEW;
 
     public Bug(long id, String desc) {
         setId(id);
-        setDesc(desc);
+        setDescription(desc);
     }
 
     public Bug(long id, String desc, BugLevel bugRating) {
@@ -18,7 +18,7 @@ public class Bug {
 
     @Override
     public String toString() {
-        return "Bug{" + "id=" + id + ", description='" + desc + '\'' + '}';
+        return "Bug{" + "id=" + id + ", description='" + description + '\'' + '}';
     }
 
     public BugLevel getBugLevel() {
@@ -33,17 +33,17 @@ public class Bug {
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, desc);
+        return Objects.hash(id, description);
     }
 
     @Override
@@ -51,6 +51,6 @@ public class Bug {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bug Bug = (Bug) o;
-        return id == Bug.id && Objects.equals(desc, Bug.desc);
+        return id == Bug.id && Objects.equals(description, Bug.description);
     }
 }

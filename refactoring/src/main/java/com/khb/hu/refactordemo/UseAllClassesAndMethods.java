@@ -1,4 +1,4 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 import java.awt.*;
 import java.util.List;
@@ -42,14 +42,16 @@ public class UseAllClassesAndMethods {
         Bug b = new Bug(12, "kkkk");
         System.out.println(b.equals(new Bug(12, "0")));
         System.out.println(b.getBugLevel());
-        System.out.println(b.getDesc());
+        System.out.println(b.getDescription());
         System.out.println(b.getId());
 
         BugReport bugReport = new BugReport(null);
-        System.out.println(new BugReport(null).binaryStrings("10"));
+        System.out.println(new BugReport(null).binaryStrings("10", true, 10));
 
         ViewImpl view = new ViewImpl();
-        System.out.println(view.getItemsList());
+        System.out.println(view.getItems(List.of(1, 2, 3, 4, 5)));
+
+        new A().drawEdge(null, new Edge(0.5f, 1, 100, 1, 200));
     }
 
     public List<String> replaceWithCollect(String[] stringArray) {

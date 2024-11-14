@@ -1,42 +1,31 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
 public class CodeMigration {
     // migrating code to Java 8 and above
     void processMap(int key, String value, Map<Integer, List<String>> mappedValues) {
-        List<String> list = mappedValues.get(key);
-        if (list == null) {
-            list = List.of(value, "Sun");
-            mappedValues.put(key, list);
-        }
+        List<String> list = mappedValues.computeIfAbsent(key, k -> List.of(value, "Sun"));
     }
 
     public List<String> replaceWithCollect(String[] stringArray) {
-        List<String> result = new ArrayList<>();
-        for (String line : stringArray) {
-            if (line != null) {
-                for (String word : line.split("\\s")) {
-                    result.add(word);
-                }
-            }
-        }
-        return result;
+        return Arrays.stream(stringArray)
+                .filter(Objects::nonNull)
+                .flatMap(line -> Arrays.stream(line.split("\\s")))
+                .toList();
     }
 
     // Lambda can be replaced with method reference
     public List<Counter> findTopTen(List<Counter> counters) {
         return counters.stream()
-                       .sorted((o1, o2) -> o1.compareTo(o2))
+                       .sorted(Comparator.naturalOrder())
                        .limit(10)
                        .collect(toList());
     }
@@ -51,22 +40,10 @@ public class CodeMigration {
     enum SingleUsePlastic {CUP, FORK, SPOON}
 
     int getDamageToPlanet(SingleUsePlastic plastic) {
-        int result;
-        switch (plastic) {
-            case CUP:
-                result = 12;
-                break;
-            case FORK:
-                result = 15;
-                break;
-            case SPOON:
-                result = 15;
-                break;
-            default:
-                result = 200;
-                break;
-        }
-        return result;
+        return switch (plastic) {
+            case CUP -> 12;
+            case FORK, SPOON -> 15;
+        };
     }
 
     // Modify pre-Java 14 code to use PatternMatching for instanceof added in Java 14
@@ -74,8 +51,7 @@ public class CodeMigration {
         final ArrayList<Node> list = modules.getChildren();
         for (Iterator<Node> i = list.iterator(); i.hasNext(); ) {
             final Object o = i.next();
-            if (o instanceof LetterNode) {
-                LetterNode letterNode = (LetterNode) o;
+            if (o instanceof LetterNode letterNode) {
                 if (letterNode.isLatin() && !isLetterTrueFont(letterNode.getNodeValue(), font, size)) {
                     i.remove();
                 }

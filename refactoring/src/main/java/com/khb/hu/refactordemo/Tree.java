@@ -1,4 +1,4 @@
-package com.jetbrains;
+package com.khb.hu.refactordemo;
 
 import java.util.ArrayList;
 import java.util.Map;
