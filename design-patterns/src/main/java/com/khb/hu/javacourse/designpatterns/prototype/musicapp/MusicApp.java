@@ -1,6 +1,7 @@
 package com.khb.hu.javacourse.designpatterns.prototype.musicapp;
 
 import com.khb.hu.javacourse.designpatterns.prototype.framework.Application;
+import com.khb.hu.javacourse.designpatterns.prototype.framework.GraphicTool;
 
 public class MusicApp extends Application {
 
@@ -12,9 +13,9 @@ public class MusicApp extends Application {
     @Override
     public void init() {
         super.init();
-        this.toolbar.add(new WholeNoteGraphicTool(this));
-        this.toolbar.add(new HalfNoteGraphicTool(this));
-        this.toolbar.add(new QuarterNoteGraphicTool(this));
-        this.toolbar.add(new StaffGraphicTool(this));
+        this.toolbar.add(new GraphicTool(this, new MusicalNote(1.0)));
+        this.toolbar.add(new GraphicTool(this, new MusicalNote(0.5)));
+        this.toolbar.add(new GraphicTool(this, new MusicalNote(0.25)));
+        this.toolbar.add(new GraphicTool(this, new Staff()));
     }
 }

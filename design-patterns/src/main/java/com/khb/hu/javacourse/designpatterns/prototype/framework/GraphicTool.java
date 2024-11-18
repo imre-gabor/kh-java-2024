@@ -1,16 +1,18 @@
 package com.khb.hu.javacourse.designpatterns.prototype.framework;
 
-public abstract class GraphicTool extends Tool {
+public class GraphicTool extends Tool {
 
     protected Application app;
+    protected Graphic prototype;
 
-    public GraphicTool(Application app) {
+    public GraphicTool(Application app, Graphic prototype) {
         this.app = app;
+        this.prototype = prototype;
     }
 
     @Override
     public void manipulate() {
-        Graphic g = createGraphic();
+        Graphic g = prototype.clone();
         while(isMouseDragged()) {
             g.draw();
         }
@@ -20,5 +22,4 @@ public abstract class GraphicTool extends Tool {
     private boolean isMouseDragged() {
         return true;
     }
-    public abstract Graphic createGraphic();
 }

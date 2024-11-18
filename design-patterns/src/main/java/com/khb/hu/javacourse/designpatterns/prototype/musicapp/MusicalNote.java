@@ -19,4 +19,10 @@ public class MusicalNote extends Graphic {
     public void draw() {
         //draw based on duration
     }
+
+    /* nem lenne szükséges, mert a shallow copy jó minden változóra*/
+    @Override
+    public Graphic clone() {
+        return super.clone();
+    }
 }
