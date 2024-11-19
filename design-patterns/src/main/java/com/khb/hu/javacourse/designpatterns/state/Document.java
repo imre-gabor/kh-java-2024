@@ -2,22 +2,19 @@ package com.khb.hu.javacourse.designpatterns.state;
 
 public class Document {
 
-    private DocState state;
+    private DocState state = new DraftDocState();
+
+    public void setState(DocState state) {
+        this.state = state;
+    }
 
     public void publish() {
-        switch (state) {
-            case DRAFT -> state = DocState.MODERATION;
-            case MODERATION -> {
-                if (isCurrentUserAdmin())
-                    state = DocState.PUBLISHED;
-            }
-            case PUBLISHED -> {} //do nothing;
-        }
+        state.publish(this);
     }
 
     //other methods with similar switch!!!
 
-    private boolean isCurrentUserAdmin() {
+    public boolean isCurrentUserAdmin() {
         return true;
     }
 }

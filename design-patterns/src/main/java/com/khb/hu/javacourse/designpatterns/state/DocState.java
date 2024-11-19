@@ -1,5 +1,6 @@
 package com.khb.hu.javacourse.designpatterns.state;
 
-public enum DocState {
-    DRAFT, MODERATION, PUBLISHED;
+public abstract class DocState {
+    //DRAFT, MODERATION, PUBLISHED;
+    public abstract void publish(Document doc);
 }
