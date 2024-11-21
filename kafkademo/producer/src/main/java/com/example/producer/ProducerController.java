@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProducerController {
 
+    int key = 0;
+
     @Autowired
     KafkaTemplate<String, String> kafkaTemplate;
 
     @GetMapping("/api/produce")
     public void produce(){
-        kafkaTemplate.send("topic11", "test");
+        kafkaTemplate.send("topic11", String.valueOf(key++), "test");
     }
 }
