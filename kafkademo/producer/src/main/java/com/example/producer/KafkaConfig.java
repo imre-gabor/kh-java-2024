@@ -1,9 +1,17 @@
 package com.example.producer;
 
 import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.core.ProducerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class KafkaConfig {
@@ -14,6 +22,26 @@ public class KafkaConfig {
                 .partitions(12)
                 .replicas(1)
                 .build();
+    }
+
+    @Bean
+    public ProducerFactory<String, String> producerFactory1() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs1());
+    }
+
+    @Bean
+    public Map<String, Object> producerConfigs1() {
+        HashMap<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+
+        return config;
+    }
+
+    @Bean
+    public KafkaTemplate<String, String> kafkaTemplate1 () {
+        return new KafkaTemplate<>(producerFactory1());
     }
 
 }
