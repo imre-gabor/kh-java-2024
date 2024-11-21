@@ -13,8 +13,12 @@ public class ProducerController {
     @Autowired
     KafkaTemplate<String, String> kafkaTemplate;
 
+    @Autowired
+    KafkaTemplate<String, Object> kafkaTemplate2;
+
     @GetMapping("/api/produce")
     public void produce(){
         kafkaTemplate.send("topic11", String.valueOf(key++), "test");
+        kafkaTemplate2.send("topic12", new MyMessage(10, 20.0, "abcd"));
     }
 }
